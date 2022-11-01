@@ -29,3 +29,46 @@
 .login button:hover {
   cursor: pointer;
 }
+
+.body {
+    min-height: calc(100vh - 80px);
+    background-color: #dddddd;
+    text-align: center;
+    display: flex;
+  }
+  
+  .userinput {
+    width: 300px;
+    background-color: #f5f5f5;
+  }
+  
+  .userinput form {
+    padding: 30px 30px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .userinput button {
+    display: block;
+    margin: 30px auto;
+    padding: 20px 50px;
+    border: none;
+    transition: 0.4s;
+    font-weight: 700;
+    background-color: #b2beb5;
+  }
+  
+  .userinput button:hover {
+    background-color: grey;
+    cursor: pointer;
+  }
+  
+  .horizontal-line {
+    border-bottom: 2px solid black;
+    margin: 0 30px;
+  }
+  
+  .info {
+    padding: 20px 0;
+  }
