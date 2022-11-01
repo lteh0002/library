@@ -11,6 +11,13 @@ function Book(title, author, page) {
     this.page = page;
   }
 
-function addBookToLibrary() {
-  // do stuff here
-}
+  function addBookToLibrary() {
+    // do stuff here
+    title = titleInput.value;
+    author = authorInput.value;
+    page = pageInput.value;
+    book = new Book(title, author, page)
+    myLibrary.push(book)
+  }
+  
+  submit.addEventListener("click", addBookToLibrary)
