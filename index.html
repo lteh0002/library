@@ -19,7 +19,7 @@
       </header>
       <div class="body">
         <div class="userinput">
-          <form action="">
+          <form class="form" action="">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" required>
             <label for="author">Author</label>
@@ -27,19 +27,21 @@
             <label for="page">Page</label>
             <input type="number" name="page" id="page">
           </form>
+          <div class="readStatus">
+            <p>Have you read it?</p>
+            <button class="status">Yes</button>
+          </div>
+            
           <button class="submit">+ Add Books</button>
-          
           <div class="horizontal-line"></div>
             <div class="info">
               <p>Total books: <span class="booknumber"></span> </p>
-              <p>Total pages: </p>
-              <p>Book read: </p>
+              <p>Total pages: <span class="pagenumber"></span></p>
+              <p>Book read: <span class="readnumber"></span></p>
             </div>
           <div class="horizontal-line"></div>
         </div>
-        <div class="library">
-   
-        </div>
+        <div class="library"></div>
       </div>
 </body>
 </html>
