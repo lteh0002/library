@@ -6,8 +6,10 @@ let bookNumber = document.querySelector('.booknumber');
 let myLibrary = [];
 let numberBook = myLibrary.length
 let title, author, page
+let bookAuthor, pages
 bookNumber.textContent = numberBook
 let userRegistered = false
+const library = document.getElementsByClassName("library")
 
 function Book(title, author, page) {
     // the constructor...
@@ -40,6 +42,23 @@ function Book(title, author, page) {
     titleInput.value = "";
     authorInput.value = "";
     pageInput.value = "";
+
+    const div = document.createElement("div")
+    bookTitle = document.createElement("h5")
+    bookAuthor = document.createElement("p");
+    pages = document.createElement("p");
+    bookTitle.innerText = title
+    bookAuthor.innerText = author
+    pages.innerHTML = page
+    library[0].appendChild(div)
+    div.appendChild(bookTitle)
+    div.appendChild(bookAuthor)
+    div.appendChild(pages)
+    console.log(div)
   }
-  
+
+
+ 
+
+
   submit.addEventListener("click", addBookToLibrary)
