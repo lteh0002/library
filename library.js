@@ -43,7 +43,12 @@ function Book(title, author, page) {
     authorInput.value = "";
     pageInput.value = "";
 
+    displayBook()
+  }
+
+  function displayBook() {
     const div = document.createElement("div")
+    div.classList.add("card")
     bookTitle = document.createElement("h5")
     bookAuthor = document.createElement("p");
     pages = document.createElement("p");
