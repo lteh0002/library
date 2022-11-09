@@ -7,12 +7,13 @@ let pageNumber = document.querySelector('.pagenumber');
 let readNumber = document.querySelector('.readnumber')
 let readStatus = document.querySelector('.status');
 let bookPages = []
-let index;
 let statusBook = "Yes";
+let statusArray = [];
 let readBookCount = 0;
 let newTotalPages;
 let currentBookPage;
 let myLibrary = [];
+let index = undefined;
 let numberBook = myLibrary.length
 readNumber.textContent = readBookCount
 let title, author, page
@@ -36,9 +37,10 @@ function Book (title, author, page, statusBook) {
     title = titleInput.value;
     author = authorInput.value;
     page = pageInput.value;
+    statusArray.push(statusBook)
     bookPages.push(Number(page))
     totalPages = bookPages.reduce((total, a) => total + a, 0)
-    console.log(totalPages)
+ 
     if (title === '' || author === '' || page === '') {
       if (title === '') {
         alert('Please insert a book name')
@@ -58,21 +60,33 @@ function Book (title, author, page, statusBook) {
       numberBook = myLibrary.length
       bookNumber.textContent = numberBook
       pageNumber.textContent = totalPages
+
+      displayBook()
+      buttonDelete = document.querySelectorAll(".deletebtn")
+      buttonDelete.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          number = Array.from(buttonDelete).indexOf(e.target);
+          return number
+        })
+      });
+
+      deleteButton.addEventListener("click", function () {
+        myLibrary.splice(number, 1)
+        bookPages.splice(number, 1)
+        statusArray.splice(number, 1)
+        totalPages = bookPages.reduce((total, a) => total + a, 0)
+        pageNumber.textContent = totalPages
+        numberBook = myLibrary.length
+        bookNumber.textContent = numberBook
+        newStatus = statusArray.filter(status => status == "Yes")
+        readNumber.textContent = newStatus.length
+      })
     }
+
+
     titleInput.value = "";
     authorInput.value = "";
     pageInput.value = "";
-
-
-  displayBook()
-  buttonDelete = document.querySelectorAll(".deletebtn")
-  buttonDelete.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-    btn.parentNode.parentNode.removeChild(btn.parentNode)
-    index = Array.from(buttonDelete).indexOf(e.target);
-    console.log(index)
-  })
-});
     
     readBookCount = 0;
     for (let i = 0; i < myLibrary.length; i++) {
@@ -82,6 +96,8 @@ function Book (title, author, page, statusBook) {
       }
     }
   }
+
+
 
   function displayBook() {
     const div = document.createElement("div")
@@ -105,11 +121,11 @@ function Book (title, author, page, statusBook) {
     div.appendChild(pages)
     div.appendChild(haveRead)
 
-    deleteButton.addEventListener("click", function deleteBook() {
+    deleteButton.addEventListener("click", function () {
       this.parentNode.parentNode.removeChild(this.parentNode)
       numberBook = myLibrary.length
       bookNumber.textContent = numberBook
-    })
+  })
   }
 
 readStatus.addEventListener("click", changeReadStatus)
