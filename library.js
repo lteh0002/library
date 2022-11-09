@@ -2,19 +2,21 @@ let titleInput = document.querySelector('#title');
 let authorInput = document.querySelector('#author');
 let pageInput = document.querySelector('#page');
 let submit = document.querySelector('.submit');
-let parent = document.querySelector('library');
 let bookNumber = document.querySelector('.booknumber');
 let pageNumber = document.querySelector('.pagenumber');
 let readNumber = document.querySelector('.readnumber')
 let readStatus = document.querySelector('.status');
-let deleteButton = document.querySelector('.deletebtn');
+let bookPages = []
+let index;
 let statusBook = "Yes";
 let readBookCount = 0;
+let newTotalPages;
+let currentBookPage;
 let myLibrary = [];
 let numberBook = myLibrary.length
 readNumber.textContent = readBookCount
 let title, author, page
-let totalPages = 0
+let totalPages;
 let bookAuthor, pages
 bookNumber.textContent = numberBook
 pageNumber.textContent = "0"
@@ -34,7 +36,9 @@ function Book (title, author, page, statusBook) {
     title = titleInput.value;
     author = authorInput.value;
     page = pageInput.value;
-    totalPages += Number(page)
+    bookPages.push(Number(page))
+    totalPages = bookPages.reduce((total, a) => total + a, 0)
+    console.log(totalPages)
     if (title === '' || author === '' || page === '') {
       if (title === '') {
         alert('Please insert a book name')
@@ -54,16 +58,22 @@ function Book (title, author, page, statusBook) {
       numberBook = myLibrary.length
       bookNumber.textContent = numberBook
       pageNumber.textContent = totalPages
-
     }
     titleInput.value = "";
     authorInput.value = "";
     pageInput.value = "";
 
-    if (myLibrary.length >= 1) {
-      displayBook()
-    }
 
+  displayBook()
+  buttonDelete = document.querySelectorAll(".deletebtn")
+  buttonDelete.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+    btn.parentNode.parentNode.removeChild(btn.parentNode)
+    index = Array.from(buttonDelete).indexOf(e.target);
+    console.log(index)
+  })
+});
+    
     readBookCount = 0;
     for (let i = 0; i < myLibrary.length; i++) {
       if (myLibrary[i].statusBook === "Yes") {
@@ -94,10 +104,11 @@ function Book (title, author, page, statusBook) {
     div.appendChild(bookAuthor)
     div.appendChild(pages)
     div.appendChild(haveRead)
+
     deleteButton.addEventListener("click", function deleteBook() {
-      myLibrary.pop()
-      cardSelector = document.querySelector(".card")
-      cardSelector.parentNode.removeChild(cardSelector)
+      this.parentNode.parentNode.removeChild(this.parentNode)
+      numberBook = myLibrary.length
+      bookNumber.textContent = numberBook
     })
   }
 
