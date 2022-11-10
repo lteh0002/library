@@ -1,3 +1,4 @@
+// add how many page read
 let titleInput = document.querySelector('#title');
 let authorInput = document.querySelector('#author');
 let pageInput = document.querySelector('#page');
@@ -13,7 +14,6 @@ let readBookCount = 0;
 let newTotalPages;
 let currentBookPage;
 let myLibrary = [];
-let index = undefined;
 let numberBook = myLibrary.length
 readNumber.textContent = readBookCount
 let title, author, page
@@ -83,7 +83,6 @@ function Book (title, author, page, statusBook) {
       })
     }
 
-
     titleInput.value = "";
     authorInput.value = "";
     pageInput.value = "";
@@ -95,9 +94,31 @@ function Book (title, author, page, statusBook) {
         readNumber.textContent = readBookCount
       }
     }
+
+    haveReadArray = document.querySelectorAll(".haveRead")
+    allStatusBtn = document.querySelectorAll('.statusbtn');
+    allStatusBtn.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        statusBtnNumber = Array.from(allStatusBtn).indexOf(e.target)
+        return statusBtnNumber
+      })
+    })
+
+    statusButton.addEventListener("click", function () {
+      if (myLibrary[statusBtnNumber].statusBook === "Yes") {
+        myLibrary[statusBtnNumber].statusBook = "No"
+        statusArray[statusBtnNumber] = "No"
+        haveReadArray[statusBtnNumber].innerText = `Have you read it?: ` + myLibrary[statusBtnNumber].statusBook
+      } else if (myLibrary[statusBtnNumber].statusBook === "No") {
+        myLibrary[statusBtnNumber].statusBook = "Yes"
+        statusArray[statusBtnNumber] = "Yes"
+        haveReadArray[statusBtnNumber].innerText = `Have you read it?: ` + myLibrary[statusBtnNumber].statusBook
+      }
+      newStatus = statusArray.filter(status => status == "Yes")
+      readNumber.textContent = newStatus.length
+    })
+
   }
-
-
 
   function displayBook() {
     const div = document.createElement("div")
@@ -107,9 +128,13 @@ function Book (title, author, page, statusBook) {
     bookAuthor = document.createElement("p");
     pages = document.createElement("p");
     haveRead = document.createElement("p")
+    haveRead.classList.add("haveRead")
     deleteButton = document.createElement("button")
     deleteButton.classList.add("deletebtn")
     deleteButton.innerText = "X"
+    statusButton = document.createElement("button")
+    statusButton.classList.add("statusbtn")
+    statusButton.innerText = "Change Read Status"
     bookTitle.innerText = `Title: ${title}`
     bookAuthor.innerText = `Author: ${author}`
     pages.innerText = `Number of pages: ${page}`
@@ -120,6 +145,7 @@ function Book (title, author, page, statusBook) {
     div.appendChild(bookAuthor)
     div.appendChild(pages)
     div.appendChild(haveRead)
+    div.appendChild(statusButton)
 
     deleteButton.addEventListener("click", function () {
       this.parentNode.parentNode.removeChild(this.parentNode)
@@ -140,4 +166,6 @@ function changeReadStatus() {
 }
 
 submit.addEventListener("click", addBookToLibrary)
+
+
 
