@@ -74,6 +74,8 @@ function Book (title, author, page, statusBook) {
         myLibrary.splice(number, 1)
         bookPages.splice(number, 1)
         statusArray.splice(number, 1)
+        haveReadArray = document.querySelectorAll(".haveRead")
+        allStatusBtn = document.querySelectorAll('.statusbtn');
         totalPages = bookPages.reduce((total, a) => total + a, 0)
         pageNumber.textContent = totalPages
         numberBook = myLibrary.length
