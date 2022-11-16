@@ -24,13 +24,22 @@ pageNumber.textContent = "0"
 let userRegistered = false
 const library = document.getElementsByClassName("library")
 
-function Book (title, author, page, statusBook) {
-    // the constructor...
+class Book {
+  constructor(title, author, page, statusBook) {
     this.title = title;
     this.author = author;
     this.page = page;
     this.statusBook = statusBook;
   }
+}
+
+// function Book (title, author, page, statusBook) {
+//     // the constructor...
+//     this.title = title;
+//     this.author = author;
+//     this.page = page;
+//     this.statusBook = statusBook;
+//   }
 
   function addBookToLibrary() {
     // do stuff here
